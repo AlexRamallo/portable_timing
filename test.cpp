@@ -51,7 +51,7 @@ void test_loop(){
 
 int main(int argc, char *argv[]){
 	printf("Initialize timer\n");
-	TimeSys::init(nullptr);
+	TimeSys::init(NULL);
 
 	if(argc == 2){
 		if(!strcmp("loop", argv[1])){

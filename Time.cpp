@@ -70,11 +70,14 @@ namespace TimeSys {
 	}
 
 	void sleepTicks(uint64_t ticks) {
-		usleep((useconds_t) ticks / 1000);
+		timespec ts;
+		ts.tv_sec = ticks / 1000000000;
+		ts.tv_nsec = ticks % 1000000000;
+		nanosleep(&ts, NULL);
 	}
 
 	void sleepMillis(uint32_t millis) {
-		usleep((useconds_t)(millis * 1000));
+		sleepTicks((uint64_t)millis * 1000000);
 	}
 
 } //namespace TimeSys
