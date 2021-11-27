@@ -16,8 +16,8 @@ namespace TimeSys {
 		if(!QueryPerformanceFrequency(&freq)){
 			assert(false && "QueryPerformanceFrequency failed!");
 		}
-		frequency = (uint64_t) freq.QuadPart;
-		frequencyMs = frequency / 1000;
+		frequency = (uint64_t) freq.QuadPart; //ticks per second
+		frequencyMs = frequency / 1000; //ticks per millisecond
 	}
 
 	uint64_t getTicks() { 
@@ -33,7 +33,7 @@ namespace TimeSys {
 	uint32_t getMillis() {
 		LARGE_INTEGER ticks;
 		QueryPerformanceCounter(&ticks);
-		return (uint64_t)(ticks.QuadPart / frequency);
+		return (uint64_t)(ticks.QuadPart / frequencyMs);
 	}
 
 	void sleepTicks(uint64_t ticks) {

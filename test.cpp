@@ -1,6 +1,11 @@
 #include "Time.h"
 #include <stdio.h>
 #include <cstring>
+#include <inttypes.h>
+
+#ifdef _WIN32
+	#define PRIu64 "lu"
+#endif
 
 void sleep_sec(int sec);
 void sleep_ticks(uint64_t ticks);
@@ -34,6 +39,8 @@ void test_loop(){
 	uint64_t freq = TimeSys::getFrequency();
 	uint32_t start_ms = TimeSys::getMillis();
 	uint64_t start_ticks = TimeSys::getTicks();
+
+	printf("freq: %" PRIu64 "\n", freq);
 
 	uint64_t ct = 0;
 	while(1){
